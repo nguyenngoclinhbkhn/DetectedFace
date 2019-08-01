@@ -440,8 +440,17 @@ public class Solution1Activity extends AppCompatActivity implements FragmentChoo
         int widthTrueStickerMouth = stickerMouth.getWidth() - convertDpToPixel(StickerView.BUTTON_SIZE_DP, this);
         int heightTrueStickerMouth = stickerMouth.getHeight() - convertDpToPixel(StickerView.BUTTON_SIZE_DP, this);
 
-        double scaleMouth = (float) (distanceMouth / widthTrueStickerMouth);
+        double scaleMouth =distanceMouth / widthTrueStickerMouth;
+        if ((scaleMouth - 1 >= 0) && (scaleMouth - 1.5 <= 0)){
+            scaleMouth = 1.5;
+        }else if (scaleMouth - 1 < 0){
+            scaleMouth = 1;
+        }else{
+            scaleMouth = Math.round(scaleMouth);
+        }
         int newWidthMouth = (int) (stickerMouth.getWidth() * scaleMouth);
+
+        Log.e("TAG", "scale 1 " + scaleMouth);
 
 
         stickerMouth.getLayoutParams().width = newWidthMouth;
